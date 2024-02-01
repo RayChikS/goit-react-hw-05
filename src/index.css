@@ -5,8 +5,10 @@
 }
 
 body {
+  margin: 0;
   font-family: sans-serif;
   line-height: 1.5;
+  font-size: 18px;
 }
 
 h1,
@@ -30,7 +32,22 @@ img {
   max-width: 100%;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 button {
   border: none;
   cursor: pointer;
+}
+
+.active {
+  color: rgb(247, 55, 26);
+  text-decoration: underline;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
 }
