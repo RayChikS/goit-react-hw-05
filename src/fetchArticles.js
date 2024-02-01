@@ -6,8 +6,26 @@ export const fetchData = async query => {
   const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
 
   const options = {
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
+    params: {
+      api_key: API_KEY,
+    },
+  };
+
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    console.error("This didn't work.");
+    throw error;
+  }
+};
+
+export const fetchPopular = async () => {
+  const url = 'https://api.themoviedb.org/3/trending/movie/day?language=en-US';
+
+  const options = {
+    params: {
+      api_key: API_KEY,
     },
   };
 
