@@ -1,9 +1,7 @@
-import { Routes, Route, Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Link, Outlet, useParams } from 'react-router-dom';
+import { useEffect, useState, Suspense } from 'react';
 import { getDataById } from '../fetchArticles';
 import { BackLink } from '../components/BackLink';
-import { MovieCast } from '../components/MovieCast';
-import { MovieReviews } from '../components/MovieReviews';
 import css from './MovieDetails.module.css';
 
 export const MovieDetails = () => {
@@ -51,17 +49,19 @@ export const MovieDetails = () => {
           {movieData.genres && (
             <p>{movieData.genres.map(genre => genre.name).join(', ')}</p>
           )}
-
-          <Routes>
-            <Route path="cast" element={<MovieCast />} />
-            <Route path="reviews" element={<MovieReviews />} />
-          </Routes>
-          <div>
-            <Link to={`/${movieId}/cast`}>Cast</Link>
-            <Link to={`/${movieId}/reviews`}>Reviews</Link>
-          </div>
         </div>
       </div>
+      <h3 className={css.addInfo}>Additional information</h3>
+      <ul className={css.details}>
+        <li>
+          <Link to={`cast`}>Cast</Link>
+        </li>
+        <li>
+          <Link to={`reviews`}>Reviews</Link>
+        </li>
+      </ul>
+
+      <Outlet />
     </>
   );
 };

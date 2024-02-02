@@ -1,4 +1,3 @@
-// Home.jsx
 import { useState, useEffect } from 'react';
 import { fetchPopular } from '../fetchArticles';
 import { Link } from 'react-router-dom';
