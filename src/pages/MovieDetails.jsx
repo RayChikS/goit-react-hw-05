@@ -67,10 +67,10 @@ export default function MovieDetails() {
       <h3 className={css.addInfo}>Additional information</h3>
       <ul className={css.details}>
         <li>
-          <Link to={`cast`}>Cast</Link>
+          <Link to={`cast?movieId=${movieId}`}>Cast</Link>
         </li>
         <li>
-          <Link to={`reviews`}>Reviews</Link>
+          <Link to={`reviews?movieId=${movieId}`}>Reviews</Link>
         </li>
       </ul>
 
