@@ -23,7 +23,7 @@ export const Home = () => {
       <h1>Trending today</h1>
       {data.map(item => (
         <Link key={item.id} to={`/movies/${item.id}`}>
-          <p>{item.title}</p>
+          <li>{item.title}</li>
         </Link>
       ))}
     </div>

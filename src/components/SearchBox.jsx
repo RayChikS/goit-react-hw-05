@@ -8,7 +8,7 @@ export const SearchBox = ({ onSearch }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input type="text" name="query" />
-      <button>Search</button>
+      <button type="submit">Search</button>
     </form>
   );
 };

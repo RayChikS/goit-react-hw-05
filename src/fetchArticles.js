@@ -38,8 +38,8 @@ export const fetchPopular = async () => {
   }
 };
 
-export const fetchDataById = async movieId => {
-  const url = `https://api.themoviedb.org/3/trending/movie/day?language=en-US`;
+export const getDataById = async movieId => {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`;
 
   const options = {
     params: {

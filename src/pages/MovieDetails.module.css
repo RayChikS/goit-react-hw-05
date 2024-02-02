@@ -1,0 +1,21 @@
+.detailsContent {
+  display: flex;
+}
+.image {
+  width: 350px;
+  height: auto;
+}
+.overview {
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+.textContent {
+  margin-left: 40px;
+}
+.title {
+  margin-bottom: 20px;
+}
+
+.score {
+  margin-bottom: 20px;
+}

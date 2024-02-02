@@ -1,47 +1,24 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import { useState } from 'react';
-
-import { Layout } from './Layout';
+import { Routes, Route } from 'react-router-dom';
 import { Home } from '../pages/Home';
 import { Movies } from '../pages/Movies';
+import { MovieDetails } from '../pages/MovieDetails';
 import { NotFound } from '../pages/NotFound';
-import { fetchData } from '../fetchArticles';
-import { Loader } from './Loader';
-import { ErrorMassage } from './ErrorMassage';
+import { MovieCast } from './MovieCast';
+import { MovieReviews } from './MovieReviews';
+import { Layout } from './Layout';
 
 export const App = () => {
-  const [articles, setArticles] = useState([]);
-  const [loader, setLoader] = useState(false);
-  const [error, setError] = useState(false);
-
-  const searchArticles = async query => {
-    try {
-      setLoader(true);
-      const result = await fetchData(query);
-      console.log(result);
-      setArticles(result);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoader(false);
-    }
-  };
-
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home data={articles} />} />
-          <Route path="movies" element={<Movies onSearch={searchArticles} />} />
-          <Route
-            path="movies/:movieId"
-            element={<Movies onSearch={searchArticles} />}
-          />
-          <Route path="*" element={<NotFound />} />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="movies/:movieId" element={<MovieDetails />}>
+          <Route path="cast" element={<MovieCast />} />
+          <Route path="reviews" element={<MovieReviews />} />
         </Route>
-      </Routes>
-      {loader && <Loader />}
-      {error && <ErrorMassage />}
-    </>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };
