@@ -1,7 +1,7 @@
 // Home.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchPopular } from '../fetchArticles';
-import { MovieItem } from '../pages/MovieItem';
+import { Link } from 'react-router-dom';
 
 export const Home = () => {
   const [data, setData] = useState([]);
@@ -20,8 +20,11 @@ export const Home = () => {
 
   return (
     <div>
+      <h1>Trending today</h1>
       {data.map(item => (
-        <MovieItem key={item.id} data={item} />
+        <Link key={item.id} to={`/movies/${item.id}`}>
+          <p>{item.title}</p>
+        </Link>
       ))}
     </div>
   );

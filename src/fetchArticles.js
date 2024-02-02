@@ -37,3 +37,21 @@ export const fetchPopular = async () => {
     throw error;
   }
 };
+
+export const fetchDataById = async movieId => {
+  const url = `https://api.themoviedb.org/3/trending/movie/day?language=en-US`;
+
+  const options = {
+    params: {
+      api_key: API_KEY,
+    },
+  };
+
+  try {
+    const response = await axios.get(url, options);
+    return response.data;
+  } catch (error) {
+    console.error("This didn't work.");
+    throw error;
+  }
+};
