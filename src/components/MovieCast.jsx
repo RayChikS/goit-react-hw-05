@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getDataById } from '../fetchArticles';
 import { useParams } from 'react-router-dom';
 
-export const MovieCast = () => {
+export default function MovieCast() {
   const { movieId } = useParams();
   const [castData, setCastData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,4 +41,4 @@ export const MovieCast = () => {
       </ul>
     </div>
   );
-};
+}

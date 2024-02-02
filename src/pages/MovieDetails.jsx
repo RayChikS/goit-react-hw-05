@@ -1,20 +1,29 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { useEffect, useState, Suspense } from 'react';
 import { getDataById } from '../fetchArticles';
 import { BackLink } from '../components/BackLink';
+import { Loader } from '../components/Loader';
+import { ErrorMassage } from '../components/ErrorMassage';
 import css from './MovieDetails.module.css';
 
-export const MovieDetails = () => {
+export default function MovieDetails() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     const fetchMovieData = async () => {
       try {
+        setLoading(true);
         const data = await getDataById(movieId);
         setMovieData(data);
       } catch (error) {
-        console.error('Error fetching movie details:', error);
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -27,7 +36,11 @@ export const MovieDetails = () => {
 
   return (
     <>
-      <BackLink to="/movies">Back to movies</BackLink>
+      <BackLink to={backLinkHref}>Go back</BackLink>
+
+      {loading && <Loader />}
+      {error && <ErrorMassage />}
+
       <div className={css.detailsContent}>
         <div className={css.imageContent}>
           <img
@@ -61,7 +74,9 @@ export const MovieDetails = () => {
         </li>
       </ul>
 
-      <Outlet />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
-};
+}

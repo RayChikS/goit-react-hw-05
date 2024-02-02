@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getDataById } from '../fetchArticles';
 import { useParams } from 'react-router-dom';
 
-export const MovieReviews = () => {
+export default function MovieReviews() {
   const { movieId } = useParams();
   const [reviewsData, setReviewsData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,4 +46,4 @@ export const MovieReviews = () => {
       </ul>
     </div>
   );
-};
+}

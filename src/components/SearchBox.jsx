@@ -1,4 +1,4 @@
-export const SearchBox = ({ onSearch }) => {
+export const SearchBox = ({ value, onSearch }) => {
   const handleSubmit = e => {
     e.preventDefault();
     onSearch(e.target.elements.query.value);
@@ -7,7 +7,12 @@ export const SearchBox = ({ onSearch }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="query" />
+      <input
+        type="text"
+        name="query"
+        value={value}
+        onChange={e => onSearch(e.target.value)}
+      />
       <button type="submit">Search</button>
     </form>
   );

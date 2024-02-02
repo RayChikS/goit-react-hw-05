@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import css from './NotFound.module.css';
 
-export const NotFound = () => {
+export default function NotFound() {
   return (
     <div>
       This page doesn't exist 😥. Go to the{' '}
@@ -10,4 +10,4 @@ export const NotFound = () => {
       </Link>
     </div>
   );
-};
+}

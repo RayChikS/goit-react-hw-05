@@ -10,8 +10,8 @@
   margin: 0 auto;
   box-shadow: 0 5px 6px 0 #000;
 }
-.link {
-  color: #000;
-  font-size: 25px;
-  text-decoration: none;
+
+.active {
+  color: rgb(247, 55, 26);
+  text-decoration: underline;
 }
