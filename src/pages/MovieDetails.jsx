@@ -67,10 +67,14 @@ export default function MovieDetails() {
       <h3 className={css.addInfo}>Additional information</h3>
       <ul className={css.details}>
         <li>
-          <Link to={`cast?movieId=${movieId}`}>Cast</Link>
+          <Link to={`cast`} state={{ from: location }}>
+            Cast
+          </Link>
         </li>
         <li>
-          <Link to={`reviews?movieId=${movieId}`}>Reviews</Link>
+          <Link to={`reviews`} state={{ from: location }}>
+            Reviews
+          </Link>
         </li>
       </ul>
 

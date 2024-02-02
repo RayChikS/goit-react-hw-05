@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getDataById } from '../fetchArticles';
+import { getReviews } from '../fetchArticles';
 import { useParams } from 'react-router-dom';
+import css from './MovieReviews.module.css';
 
 export default function MovieReviews() {
   const { movieId } = useParams();
@@ -11,11 +12,10 @@ export default function MovieReviews() {
   useEffect(() => {
     const fetchReviewsData = async () => {
       try {
-        const data = await getDataById(movieId);
-        console.log(data);
+        const data = await getReviews(movieId);
 
-        if (data && data.reviews && Array.isArray(data.reviews)) {
-          setReviewsData(data.reviews);
+        if (data && data.results) {
+          setReviewsData(data.results);
         } else {
           setReviewsData([]);
         }
@@ -35,14 +35,18 @@ export default function MovieReviews() {
 
   return (
     <div>
-      <h3>Movie Reviews</h3>
+      <h3 className={css.title}>Movie Reviews</h3>
       <ul>
-        {reviewsData.map(review => (
-          <li key={review.id}>
-            <p>{review.author}</p>
-            <p>{review.content}</p>
-          </li>
-        ))}
+        {reviewsData.length > 0 ? (
+          reviewsData.map(review => (
+            <li className={css.card} key={review.id}>
+              <p className={css.author}>{review.author}</p>
+              <p>{review.content}</p>
+            </li>
+          ))
+        ) : (
+          <p>We don't have any reviews for this movie.</p>
+        )}
       </ul>
     </div>
   );

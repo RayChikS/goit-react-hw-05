@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getDataById } from '../fetchArticles';
+import { getCast } from '../fetchArticles';
 import { useParams } from 'react-router-dom';
+import css from './MovieCast.module.css';
 
 export default function MovieCast() {
   const { movieId } = useParams();
@@ -11,9 +12,8 @@ export default function MovieCast() {
   useEffect(() => {
     const fetchCastData = async () => {
       try {
-        const data = await getDataById(movieId);
-        console.log(data);
-        if (data && data.cast && Array.isArray(data.cast)) {
+        const data = await getCast(movieId);
+        if (data && data.cast) {
           setCastData(data.cast);
         } else {
           setCastData([]);
@@ -36,7 +36,15 @@ export default function MovieCast() {
       <h3>Movie Cast</h3>
       <ul>
         {castData.map(actor => (
-          <li key={actor.id}>{actor.name}</li>
+          <li className={css.card} key={actor.id}>
+            <img
+              className={css.image}
+              src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
+              alt={actor.name}
+            />
+            <h4>{actor.name}</h4>
+            <p>Character: {actor.character}</p>
+          </li>
         ))}
       </ul>
     </div>
